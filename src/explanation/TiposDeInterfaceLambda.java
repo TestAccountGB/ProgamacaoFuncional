@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class TiposDeInterfaceLambda {
 	public static void main(String[] args) {
@@ -85,6 +86,16 @@ public class TiposDeInterfaceLambda {
 		
 		System.out.println(tamanho);
 		
+		//Supplier - Nao recebe nenhum parametro, mas temos que retornar algum valor no metodo
+		System.out.println();
+		System.out.println("---Supplier---");
+		System.out.println();
+		
+		Supplier<String> supplier = (() -> "Valor bacana");
+		String valorSupplier = supplier.get();
+		//Seu unico objetivo e retornar o valor ;-;. Acredite em mim, isso pode ser util
+		System.out.println(valorSupplier);
+		
 		//Classes bi
 		//No java temos interfaces Bi dessas interfaces acima, ou seja, que recebem dois parametros.
 		
@@ -102,6 +113,7 @@ public class TiposDeInterfaceLambda {
 		//Tambem temos interfaces com tipo primitivos caso seu objetivo seja performance, pois assim nao ocorre o
 		//Autoboxing e etc
 		IntPredicate intPredicate = (int i) -> i > 10;
+		//Nao ocorre o uso de Generics foi seu tipo ja foi setado como int, obviamente.
 		
 		System.out.println();
 		System.out.println(intPredicate.test(13));

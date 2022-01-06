@@ -48,7 +48,8 @@ public class MethodReferences {
 		//Todo metodo "compare" tem que retornar um int, entao quando a gente chama:
 		//CarMethodReference::ordenarPorNome, ele vai ver se esse metodo e compativo
 		//Metodo: public static int ordenarPorNome(Car car, Car otherCar); Como podemos ver ele retorna um int e tem
-		//Dois parametros objeto da classe "Car", ou seja, e compativo.
+		//Dois parametros objeto da classe "Car", ou seja, e compativo. Mesmo seu corpo nao fazendo nenhum sentido
+		//O java vai aceitar ele, pois ele e compativo.
 		
 		//2 - Reference to an instance method of a particular object
 		//Basicamente igual ao primeiro so que dessa vez o mesmo nao precisa ser estatico pois e alcancado atraves de um
@@ -104,17 +105,21 @@ public class MethodReferences {
 		@SuppressWarnings("unused")
 		CarTest<Car> test2 = Car::new;
 		
-		//Quando temo parametros no construtor:
+		//Quando temos parametros no construtor:
 		@SuppressWarnings("unused")
 		BiFunction<String, Integer, Car> carroBiFunction = (String s, Integer i) -> new Car(s, i);
-		//COmo podemos ver, isso e um construtor padrao, logo:
+		//Como podemos ver, isso e um construtor padrao, logo:
 		BiFunction<String, Integer, Car> carroBiFunction2 = Car::new;
-		//E basicamente como se ele estivisse injetando os parametros no construto
+		//E basicamente como se ele estivisse injetando os parametros no construtor sozinho, pois o java consegue
+		//Perceber que o primeiro generics vai no primeiro parametro do construtor, por isso tem que ficar em ordem,
+		//Assim nao funciona: BiFunction<Integer, String, Car> carroBiFunction2 = Car::new;
 		
-		//Obs.: Os objetos nao foram instanciados, e so quando a gente chama o metodo da interface funcional que eles sao
-		//Instaciados:
-		System.out.println(carroBiFunction2.apply("Corsa", 2015));
+		//Obs.: Os objetos nao foram instanciados. Apenas sao instaciados quando a gente chama o metodo da interface 
+		//Funcional que eles sao instaciados:
+		Car carroFunction = carroBiFunction2.apply("Corsa", 2015);
+		System.out.println(carroFunction);
 		
 		//Obs.: O uso do MethodReference e apenas para substituir as lambdas quando suas implementacoes sao padrao
+		
 	}
 }

@@ -56,8 +56,22 @@ public class Lambda {
 		lambdaVoid.test();
 		//Imagine lambda como apenas uma sobreescrita de um metodo que fica mais facil, mas na verdade ela e chamada
 		//De funcao, e nao metodo :>
+		
+		//E como lambda e basicamente um metodo, MAS CHAMAMOS DE FUNCAO, podemos fazer lambdas mais
+		//Complicadas:
+		MyLambda<Car> myLambda = (Car car) -> {
+			if(car.getYear() > 2000) System.out.println("Carro novo");
+			else System.out.println("Carro velho");
+		};
+		
+		myLambda.test(corsa);
+		myLambda.test(new Car("Celta", Car.Color.WHITE, 1999));
+		
 		//Obs.: Lambda so funciona em Interface Funcionais
 		
+		//Mas porque usar as interfaces lambda do java e nao fazer as minhas? Porque eles ja tem uma cacetada de
+		//Interfaces para lambdas ja criadas, e todo mundo ja se acostumou com elas. Mas sim, voce pode fazer suas
+		//Interfaces para lambda
 		
 	}
 	
@@ -71,4 +85,9 @@ interface LambdaInterface<T, Y> {
 @FunctionalInterface
 interface LambdaVoid {
 	void test();
+}
+
+@FunctionalInterface
+interface MyLambda<T>{
+	void test(T t);
 }
